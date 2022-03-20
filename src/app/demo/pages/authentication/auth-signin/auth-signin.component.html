@@ -5,10 +5,10 @@
         <div class="col-md-12">
           <div class="card-body">
             <img src="assets/images/logoTalan.png" width="50%" alt="" class="img-fluid mb-4">
-            <h4 class="mb-3 f-w-400">Signin</h4>
+            <h4 class="mb-3 f-w-400" style="margin-top: -15%;">Signin</h4>
            
           
-            <form [formGroup]="registeForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <form [formGroup]="registeForm" (ngSubmit)="onSubmit()" autocomplete="off" style="margin-top: -2%;">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="feather icon-mail"></i></span>
@@ -21,15 +21,15 @@
                 </div>
                 <input type="password" required class="form-control" formControlName="password" placeholder="Mot de passe">
               </div>
-              <!--
-
-              <app-alert type="{{type}}" dismiss="true" class="alert" id="alert" hidden>{{alertText}}</app-alert>
-
-              -->
+      
               <button class="btn btn-block btn-primary mb-4" type="submit" [disabled]="isSubmitted">Se Connecter</button>
            
             </form>
+        
 
+              <app-alert type="{{type}}" dismiss="true" class="alert" id="alert" hidden>{{alertText}}</app-alert>
+
+            
           </div>
         </div>
       </div>

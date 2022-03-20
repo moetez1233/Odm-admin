@@ -1,1 +1,72 @@
-<p>profile-user works!</p>
+<div class="row">
+    <div class="col-sm-12">
+        <app-card app-card [options]="false" cardTitle="Mes informations">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="d-block w-100" src="assets/images/userImg.png" alt="First Slide">
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-8">
+                        <perfect-scrollbar style="min-height: 10px;max-height: 280px;">
+                            <div class="table-responsive" *ngIf="!adminIndex">
+                                <table class="table">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+
+
+                                        <tr>
+                                            <th>
+                                                <h6>Prénom</h6>
+                                            </th>
+                                            <th>Maddouri</th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <h6>Nom</h6>
+                                            </th>
+                                            <th>Moetez</th>
+                                            <th style="text-align: right;">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <h6>Numéro de Téléphone</h6>
+                                            </th>
+                                            <th>55611346</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <h6>Adresse Email</h6>
+                                            </th>
+                                            <th>moetezmaddouri@gmail.col-md-12</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <h6>Adress</h6>
+                                            </th>
+                                            <th>Tunis</th>
+                                            <th style="text-align: right;">
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </perfect-scrollbar>
+                    </div>
+                </div>
+            </div>
+
+
+        </app-card>
+
+
+    </div>
+
+</div>

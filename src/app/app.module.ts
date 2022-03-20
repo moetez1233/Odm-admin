@@ -26,6 +26,10 @@ import { NavigationItem } from './theme/layout/admin/navigation/navigation';
 import { NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 /*  PFE add */
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from 'src/TokenHed/token-inspector.service';
+
+
 
 @NgModule({
   declarations: [
@@ -55,7 +59,16 @@ import { HttpClientModule } from '@angular/common/http';
     NgbTabsetModule,
     HttpClientModule
   ],
-  providers: [NavigationItem],
+  providers: [
+    NavigationItem,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+
+
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

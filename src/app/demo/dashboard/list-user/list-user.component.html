@@ -1,0 +1,176 @@
+<div class="row">
+
+    <div class="col-sm-12 m-b-15">
+        <div id="main-search" class="main-search open">
+            <div class="input-group">
+                <input type="text" id="m-search" class="form-control" placeholder="Search . . ." (keyup)="verifyingSearch($event)">
+                <span class="input-group-append search-btn btn btn-primary feather icon-search input-group-text" (click)="Search()">
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <app-card [options]="false" cardTitle="Liste des Administrateurs">
+            <perfect-scrollbar style="min-height: 10px;max-height: 280px;">
+                <div class="col-md-12">
+                    <ng-container>
+                        <ng-container *ngFor="let admin of allUser;let adminIndex=index;">
+                            <app-alert style="cursor: pointer;" [type]="adminsColor[adminIndex]" (mouseenter)="hoverOn(adminIndex)" (mouseleave)="hoverOff(adminIndex)" (click)="adminClicked(adminIndex)">
+
+                                <div class="row" style="margin-left: -20px;margin-right: -10px;">
+                                    <div id="searche"></div>
+                                    <i class="col-md-12 text-left">{{admin.name}} </i>
+                                </div>
+                            </app-alert>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </perfect-scrollbar>
+        </app-card>
+    </div>
+
+    <div class="col-md-8">
+        <app-card [options]="false" cardTitle="Details de l'Administrateur">
+            <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
+                <div class="table-responsive" *ngIf="!adminIndex">
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <th>Prénom</th>
+                                <th>{{clickedAdmin.lastName}}</th>
+                                <th>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Nom</th>
+                                <th>{{clickedAdmin.name}}</th>
+                                <th style="text-align: right;">
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Numéro de Téléphone</th>
+                                <th>{{clickedAdmin.phone_number}}</th>
+
+                            </tr>
+                            <tr>
+                                <th>Cin</th>
+                                <th>{{clickedAdmin.cin}}</th>
+
+                            </tr>
+                            <tr>
+                                <th>Adresse Email</th>
+                                <th>{{clickedAdmin.email}}</th>
+
+                            </tr>
+                            <tr>
+                                <th>Adress</th>
+                                <th>{{clickedAdmin.adress}}</th>
+                                <th style="text-align: right;">
+                                </th>
+                            </tr>
+                            <!--
+                            <tr>
+                                <th>Rôle</th>
+                                <th>{{clickedAdmin.rolesGroupe ? clickedAdmin.rolesGroupe.length : 0}}</th>
+                                <th style="text-align: right;">
+                                    <img *ngIf="adminCanChangeRoles" src="assets/images/edit.png" (click)="editRolesPop.show();editRoles()">
+                                </th>
+                            </tr>
+                        -->
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive" *ngIf="updateUser">
+
+                    <form autocomplete="off" [formGroup]="AddForm">
+                        <table class="table">
+                            <thead>
+                            </thead>
+                            <tbody>
+
+
+                                <tr>
+                                    <th>Prenom</th>
+                                    <th>
+                                        <input type="email" class="form-control" formControlName="Prenom" value="{{clickedAdmin.lastName}}" required [readonly]="isSubmitted">
+                                    </th>
+                                    <th>
+                                    </th>
+                                    <th>Nom</th>
+                                    <th>
+                                        <input type="email" class="form-control" formControlName="name" value="{{clickedAdmin.name}}" required [readonly]="isSubmitted">
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Adress</th>
+                                    <th>
+                                        <input type="email" class="form-control" formControlName="name" value="{{clickedAdmin.adress}}" required [readonly]="isSubmitted">
+                                    </th>
+                                    <th>
+                                    </th>
+                                    <th>Téléphone</th>
+                                    <th>
+                                        <input type="email" class="form-control" formControlName="name" value="{{clickedAdmin.phone_number}}" required [readonly]="isSubmitted">
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Cin</th>
+                                    <th>
+                                        <input type="email" class="form-control" formControlName="name" value="{{clickedAdmin.cin}}" required [readonly]="isSubmitted">
+                                    </th>
+                                    <th>
+                                    </th>
+                                    <th>Email</th>
+                                    <th>
+                                        <input type="email" class="form-control" formControlName="name" value="{{clickedAdmin.phone_number}}" required [readonly]="isSubmitted">
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Roles</th>
+                                    <th>
+                                        <input type="email" class="form-control" formControlName="name" required [readonly]="isSubmitted">
+                                    </th>
+                                    <th>
+                                    </th>
+
+                                </tr>
+
+
+
+
+
+                            </tbody>
+                        </table>
+                    </form>
+
+
+                </div>
+
+
+            </perfect-scrollbar>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <!--  -->
+                    <div>
+                        <button type="button" class="btn btn-success" (click)="Update()">Mettre à jour</button>
+                        <button type="button" class="btn btn-danger">Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </app-card>
+    </div>
+
+</div>

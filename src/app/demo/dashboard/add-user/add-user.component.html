@@ -1,0 +1,134 @@
+<div class="row">
+
+    <div class="col-sm-12">
+        <form autocomplete="off" [formGroup]="AddForm">
+            <app-card [options]="false" cardTitle="Information de l'administrateur">
+
+
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nom</label>
+                            <input type="email" class="form-control" formControlName="name" required [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="form-group">
+                            <label style="font: bold;">Prénom</label>
+                            <input type="text" class="form-control" formControlName="lastName" required [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputNom1">Adress</label>
+                            <input type="text" class="form-control" formControlName="adress" required [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="form-group">
+                            <label for="exampleInputNumTel1">Numéro Téléphone</label>
+                            <input type="tel" class="form-control" formControlName="phone_number" required [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Cin</label>
+                            <input type="password" class="form-control" formControlName="cin" required [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="form-group">
+                            <label style="font: bold;">email</label>
+                            <input type="text" class="form-control" formControlName="email" required [readonly]="isSubmitted">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputNom1">mot de passe</label>
+                            <input type="password" class="form-control" formControlName="password" required [readonly]="isSubmitted">
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </app-card>
+            <app-card [options]="false" cardTitle="Roles">
+                <div class="row">
+
+
+                    <div class="col-md-4 " *ngFor="let titleRole of checkboxesDataList; let rolTypeIndex=index ">
+                        <app-card [options]="false" cardTitle="{{titleRole.name}}">
+                            <div *ngFor="let role of titleRole.roles ; let rolIndex=index">
+
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" formControlName="roles" required id="{{role}}" (change)="roleClick(rolTypeIndex,rolIndex)">
+                                    <label class="custom-control-label" for="{{role}}">{{role}}</label>
+                                </div>
+
+                            </div>
+
+
+
+                        </app-card>
+
+                    </div>
+
+                    <!--
+                <div class="col-md-4 ">
+                    <app-card [options]="false" cardTitle="Administrateur ">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customswitch1">
+                            <label class="custom-control-label" for="customswitch1">Ajouter Admin</label>
+                        </div>
+                        <div class="custom-control custom-switch" style="margin-top: 2%;">
+                            <input type="checkbox" class="custom-control-input" id="customswitch1">
+                            <label class="custom-control-label" for="customswitch1">Consulter list Admin</label>
+                        </div>
+
+                    </app-card>
+                </div>
+                <div class="col-md-4 ">
+                    <app-card [options]="false" cardTitle="Dashbord ">
+                        <div class="custom-control custom-switch" style="margin-top: 2%;">
+                            <input type="checkbox" class="custom-control-input" id="customswitch1">
+                            <label class="custom-control-label" for="customswitch1">Dashbord </label>
+                        </div>
+                        <div class="custom-control custom-switch" style="margin-top: 2%;">
+                            <input type="checkbox" class="custom-control-input" id="customswitch1">
+                            <label class="custom-control-label" for="customswitch1">Ajouter SF</label>
+                        </div>
+
+                    </app-card>
+                </div>
+                <div class="col-md-4 ">
+                    <app-card [options]="false" cardTitle="Consulter ">
+                        <div class="custom-control custom-switch" style="margin-top: 2%;">
+                            <input type="checkbox" class="custom-control-input" id="customswitch1">
+                            <label class="custom-control-label" for="customswitch1">Consulter Etat SF</label>
+                        </div>
+                        <div class="custom-control custom-switch" style="margin-top: 2%;">
+                            <input type="checkbox" class="custom-control-input" id="customswitch1">
+                            <label class="custom-control-label" for="customswitch1">Consulter Status SF</label>
+                        </div>
+                    </app-card>
+
+                </div>*
+            -->
+
+                </div>
+
+            </app-card>
+        </form>
+    </div>
+    <div class="col-sm-12" style="margin-bottom: 20px;">
+
+
+
+        <button class="btn btn-primary" style="margin-right: 5px;" (click)="addAdmin()" type="button" [disabled]="isSubmitted">Ajouter Administrateur</button>
+    </div>
+
+</div>

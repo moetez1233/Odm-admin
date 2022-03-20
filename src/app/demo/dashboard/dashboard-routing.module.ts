@@ -13,6 +13,14 @@ const routes: Routes = [
         path: 'profileUser',
         loadChildren: () => import('./profile-user/profile-user.module').then(module => module.ProfileUserModule)
       },
+      {
+        path: 'AddUser',
+        loadChildren: () => import('./add-user/add-user.module').then(module => module.AddUserModule)
+      },
+      {
+        path: 'listUser',
+        loadChildren: () => import('./list-user/list-user.module').then(module => module.ListUserModule)
+      },
     ]
   }
 ];

@@ -27,7 +27,7 @@ export interface Navigation extends NavigationItem {
 
 const NavigationItems = [
   {
-    id: 'navigation',
+    id: 'Navigation',
     title: 'Navigation',
     type: 'group',
     icon: 'feather icon-monitor',
@@ -48,290 +48,145 @@ const NavigationItems = [
         icon: 'feather icon-user'
       },
       {
-        id: 'page-layouts',
-        title: 'Horizontal Layouts',
+        id: 'AddUser',
+        title: 'AddUser',
         type: 'item',
-        url: '/layout/horizontal',
-        target: true,
-        icon: 'feather icon-layout'
-      }
-    ]
-  },
-  {
-    id: 'ui-element',
-    title: 'UI ELEMENT & FORMS',
-    type: 'group',
-    icon: 'feather icon-layers',
-    children: [
-      {
-        id: 'basic',
-        title: 'Basic',
-        type: 'collapse',
-        icon: 'feather icon-box',
-        children: [
-          {
-            id: 'alert',
-            title: 'Alert',
-            type: 'item',
-            url: '/basic/alert'
-          },
-          {
-            id: 'button',
-            title: 'Button',
-            type: 'item',
-            url: '/basic/button'
-          },
-          {
-            id: 'badges',
-            title: 'Badges',
-            type: 'item',
-            url: '/basic/badges'
-          },
-          {
-            id: 'breadcrumb-pagination',
-            title: 'Breadcrumbs & Pagination',
-            type: 'item',
-            url: '/basic/breadcrumb-paging'
-          },
-          {
-            id: 'cards',
-            title: 'Cards',
-            type: 'item',
-            url: '/basic/cards'
-          },
-          {
-            id: 'collapse',
-            title: 'Collapse',
-            type: 'item',
-            url: '/basic/collapse'
-          },
-          {
-            id: 'carousel',
-            title: 'Carousel',
-            type: 'item',
-            url: '/basic/carousel'
-          },
-          {
-            id: 'grid-system',
-            title: 'Grid System',
-            type: 'item',
-            url: '/basic/grid-system'
-          },
-          {
-            id: 'progress',
-            title: 'Progress',
-            type: 'item',
-            url: '/basic/progress'
-          },
-          {
-            id: 'modal',
-            title: 'Modal',
-            type: 'item',
-            url: '/basic/modal'
-          },
-          {
-            id: 'spinner',
-            title: 'Spinner',
-            type: 'item',
-            url: '/basic/spinner'
-          },
-          {
-            id: 'tabs-pills',
-            title: 'Tabs & Pills',
-            type: 'item',
-            url: '/basic/tabs-pills'
-          },
-          {
-            id: 'typography',
-            title: 'Typography',
-            type: 'item',
-            url: '/basic/typography'
-          },
-          {
-            id: 'tooltip-popovers',
-            title: 'Tooltip & Popovers',
-            type: 'item',
-            url: '/basic/tooltip-popovers'
-          },
-          {
-            id: 'other',
-            title: 'Other',
-            type: 'item',
-            url: '/basic/other'
-          }
-        ]
+        url: '/dashboard/AddUser',
+        icon: 'feather icon-user'
       },
-      {
-        id: 'forms-element',
-        title: 'Form Elements',
-        type: 'item',
-        url: '/forms/basic',
-        icon: 'feather icon-file-text'
-      }
     ]
   },
   {
-    id: 'table',
-    title: 'Table & Charts',
+    id: 'Administrateur',
+    title: 'Administrateur ',
     type: 'group',
     icon: 'feather icon-list',
     children: [
       {
-        id: 'bootstrap',
-        title: 'Bootstrap Table',
+        id: 'listUser',
+        title: 'listUser',
         type: 'item',
-        url: '/tbl-bootstrap/bt-basic',
+        url: '/dashboard/listUser',
         icon: 'feather icon-server'
       },
+    
       {
-        id: 'apex',
-        title: 'Apex Chart',
+        id: 'listCompt',
+        title: 'listCompt',
         type: 'item',
-        url: '/charts/apex',
-        icon: 'feather icon-pie-chart'
+        url: '/consulter/listCompt',
+        icon: 'feather icon-server'
       }
     ]
   },
   {
-    id: 'pages',
-    title: 'Pages',
+    id: 'Consulter',
+    title: 'Consulter ',
     type: 'group',
-    icon: 'feather icon-file-text',
+    icon: 'feather icon-list',
     children: [
       {
-        id: 'auth',
-        title: 'Authentication',
-        type: 'collapse',
-        icon: 'feather icon-lock',
-        children: [
-          {
-            id: 'signup',
-            title: 'Sign up',
-            type: 'item',
-            url: '/auth/signup',
-            target: true,
-            breadcrumbs: false
-          },
-          {
-            id: 'signin',
-            title: 'Sign in',
-            type: 'item',
-            url: '/auth/signin',
-            target: true,
-            breadcrumbs: false
-          },
-          {
-            id: 'reset-password',
-            title: 'Reset Password',
-            type: 'item',
-            url: '/auth/reset-password',
-            target: true,
-            breadcrumbs: false
-          },
-          {
-            id: 'change-password',
-            title: 'Change Password',
-            type: 'item',
-            url: '/auth/change-password',
-            target: true,
-            breadcrumbs: false
-          }
-        ]
+        id: 'list_SF',
+        title: 'list_SF',
+        type: 'item',
+        url: '/consulter/list_SF',
+        icon: 'feather icon-server'
       },
-      {
-        id: 'maintenance',
-        title: 'Maintenance',
-        type: 'collapse',
-        icon: 'feather icon-sliders',
-        children: [
-          {
-            id: 'error',
-            title: 'Error',
-            type: 'item',
-            url: '/maintenance/error',
-            target: true,
-            breadcrumbs: false
-          },
-          {
-            id: 'coming-soon',
-            title: 'Maintenance',
-            type: 'item',
-            url: '/maintenance/coming-soon',
-            target: true,
-            breadcrumbs: false
-          }
-        ]
-      }
+      /*{
+        id: 'listCompt',
+        title: 'listCompt',
+        type: 'item',
+        url: '/consulter/listCompt',
+        icon: 'feather icon-server'
+      }*/
     ]
   },
-  {
-    id: 'other',
-    title: 'Other',
-    type: 'group',
-    icon: 'feather icon-align-left',
-    children: [
-      {
-        id: 'menu-level',
-        title: 'Menu Levels',
-        type: 'collapse',
-        icon: 'feather icon-menu',
-        children: [
-          {
-            id: 'menu-level-2.1',
-            title: 'Menu Level 2.1',
-            type: 'item',
-            url: 'javascript:',
-            external: true
-          },
-          {
-            id: 'menu-level-2.2',
-            title: 'Menu Level 2.2',
-            type: 'collapse',
-            children: [
-              {
-                id: 'menu-level-2.2.1',
-                title: 'Menu Level 2.2.1',
-                type: 'item',
-                url: 'javascript:',
-                external: true
-              },
-              {
-                id: 'menu-level-2.2.2',
-                title: 'Menu Level 2.2.2',
-                type: 'item',
-                url: 'javascript:',
-                external: true
-              }
-            ]
-          }
-        ]
-      },
-      {
-        id: 'disabled-menu',
-        title: 'Disabled Menu',
-        type: 'item',
-        url: 'javascript:',
-        classes: 'nav-item disabled',
-        icon: 'feather icon-power',
-        external: true
-      },
-      {
-        id: 'sample-page',
-        title: 'Sample Page',
-        type: 'item',
-        url: '/sample-page',
-        classes: 'nav-item',
-        icon: 'feather icon-sidebar'
-      }
-    ]
-  }
-];
 
+];
+export class child {
+  id: string;
+  title: string;
+  type: string;
+  url: string;
+  icon: string;
+}
+export class role {
+  id: string;
+  title: string;
+  type: string;
+  icon?: string;
+  children: child[]
+  constructor() {
+    this.id = "";
+    this.title = "";
+    this.type = "";
+    this.icon = "";
+    this.children = []
+  }
+}
+
+const roles=[
+ 
+  "Dashboard"  , 
+  "ProfileUser",
+  "AddUser",
+"listUser",
+
+]
 @Injectable()
 export class NavigationItem {
   public get() {
-    console.log(NavigationItems);
+    let adminAllRoles: role[] = []
     
-    return NavigationItems;
+    //admin-space
+    adminAllRoles:[] = [];
+    let adminRole: role;
+    /*for (let i = 0; i < NavigationItems.length; i++) {
+      adminRole = new role();
+      adminRole.id = NavigationItems[i].id;
+      adminRole.title = NavigationItems[i].title;
+      adminRole.type = NavigationItems[i].type;
+      adminRole.icon = NavigationItems[i].icon;
+      console.log(adminRole);
+      for(let j=0;j<NavigationItems[i].children.length;i++){
+        if(roles.includes(NavigationItems[i].children[j].title)){
+          adminRole.children[adminRole.children.length]=NavigationItems[i].children[j];
+        }
+      }
+      if (adminRole.children.length !== 0) {
+        adminAllRoles[adminAllRoles.length] = adminRole
+      }
+    }*/
+  
+   if (roles) {
+      let adminRole: role;
+      for (let i = 0; i < NavigationItems.length; i++) {
+        adminRole = new role();
+        adminRole.id = NavigationItems[i].id;
+        adminRole.title = NavigationItems[i].title;
+        adminRole.type = NavigationItems[i].type;
+        adminRole.icon = NavigationItems[i].icon;
+        console.log(adminRole);
+        
+        for (let j = 0; j < NavigationItems[i].children.length; j++) {
+          if (roles.indexOf(NavigationItems[i].children[j].title) !== -1) {
+            adminRole.children[adminRole.children.length] = NavigationItems[i].children[j];
+          }
+        }
+        if (adminRole.children.length !== 0) {
+          adminAllRoles[adminAllRoles.length] = adminRole
+        }
+      }
+    }
+    for(let i=0;i<adminAllRoles.length;i++){
+      console.log(adminAllRoles[i].id);
+      
+    }
+    //console.log(adminAllRoles);
+
+    return adminAllRoles;
+
+  
+   
   }
 }

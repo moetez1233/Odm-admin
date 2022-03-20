@@ -1,27 +1,32 @@
+import { ListUserComponent } from './list-user.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProfileUserRoutingModule } from './profile-user-routing.module';
-import{ProfileUserComponent} from './profile-user.component'
+import { ListUserRoutingModule } from './list-user-routing.module';
+
+
+
 /* from template  */
 import {SharedModule} from '../../../theme/shared/shared.module';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbPopoverModule, NgbProgressbarModule, NgbTabsetModule , NgbTooltipModule,NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
-import {  HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule } from 'angular-webstorage-service';
 
 /* required for working page   */
+
 @NgModule({
- 
+  
   imports: [
     CommonModule,
-    ProfileUserRoutingModule,
+    ListUserRoutingModule,
+    SharedModule,
     FormsModule, ReactiveFormsModule,
-    NgbPopoverModule, NgbProgressbarModule, NgbTabsetModule , NgbTooltipModule,NgbCollapseModule,
-    HttpClientModule,
-    SharedModule
+    NgbPopoverModule, NgbProgressbarModule, NgbTabsetModule , NgbTooltipModule,
+    HttpClientModule ,
+    StorageServiceModule,NgbCollapseModule
   ],
-  declarations: [ProfileUserComponent],
+  declarations: [ListUserComponent]
 })
-export class ProfileUserModule { }
+export class ListUserModule { }
