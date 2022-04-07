@@ -1,33 +1,28 @@
-import { ListUserComponent } from './list-user.component';
+import { ImportSfComponent } from './import-sf.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ListUserRoutingModule } from './list-user-routing.module';
-
-
+import { ImportSfRoutingModule } from './import-sf-routing.module';
 
 /* from template  */
 import {SharedModule} from '../../../theme/shared/shared.module';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgbPopoverModule, NgbProgressbarModule, NgbTabsetModule , NgbTooltipModule,NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import {  HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule } from 'angular-webstorage-service';
 
 /* required for working page   */
-
 @NgModule({
-  
+  declarations: [ImportSfComponent],
   imports: [
     CommonModule,
-    ListUserRoutingModule,
-    SharedModule,
+    ImportSfRoutingModule,
+    StorageServiceModule,
+    HttpClientModule,
     FormsModule, ReactiveFormsModule,
-    NgbPopoverModule, NgbProgressbarModule, NgbTabsetModule , NgbTooltipModule,
-    HttpClientModule ,
-    StorageServiceModule,NgbCollapseModule,
-    
-  ],
-  declarations: [ListUserComponent]
+    NgbPopoverModule, NgbProgressbarModule, NgbTabsetModule , NgbTooltipModule,NgbCollapseModule,
+    SharedModule
+  ]
 })
-export class ListUserModule { }
+export class ImportSfModule { }

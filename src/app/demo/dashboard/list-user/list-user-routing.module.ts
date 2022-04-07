@@ -1,12 +1,14 @@
 import { ListUserComponent } from './list-user.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/auth.guard';
 
 
 const routes: Routes = [
   {
     path:'',
-    component:ListUserComponent
+    component:ListUserComponent,
+    canActivate:[AuthGuard]
   }
 ];
 @NgModule({

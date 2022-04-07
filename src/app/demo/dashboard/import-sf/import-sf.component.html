@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-sm-12">
+        <app-card app-card [options]="false" cardTitle="Choisi votre SheapmentFile ">
+            <div class="upload">
+                <div class="UpladBTN">
+                    <div (click)="UploadSF()">
+                        <div class="imageUpload">
+                            <img src="assets/images/uploadSF.png" alt="UploadSF">
+                        </div>
+                        <button type="button" class="btn btn-primary"><i class="feather icon-upload"></i>Upload</button>
+                    </div>
+
+                    <input type="file" #fileUpload id="fileUpload" name="fileUpload" style="display:none;" />
+                    <div>
+                        <h6 style="margin-top: 2%;margin-bottom: 2%;">{{fileName}}</h6>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-6" *ngIf="showProgrssBar">
+                            <ngb-progressbar [showValue]="true" [value]="100"></ngb-progressbar>
+                        </div>
+
+                    </div>
+                    <div *ngFor="let alertMessage of listErreurUpload ;let indexAlert=index">
+                        <app-alert type="danger" *ngIf="showAlert">{{alertMessage}} </app-alert>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </app-card>
+    </div>
+</div>

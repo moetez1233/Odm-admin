@@ -1,5 +1,6 @@
+import { TokenStorageServiceService } from './../../../../../Service/token-storage-service.service';
 import {Injectable} from '@angular/core';
-
+import { ApprovalService } from 'src/Service/approval.service';
 export interface NavigationItem {
   id: string;
   title: string;
@@ -33,27 +34,16 @@ const NavigationItems = [
     icon: 'feather icon-monitor',
     children: [
       
-      {
-        id: 'dashboard',
-        title: 'Dashboard',
-        type: 'item',
-        url: '/dashboard/analytics',
-        icon: 'feather icon-home'
-      },
+     
       {
         id: 'ProfileUser',
         title: 'ProfileUser',
         type: 'item',
         url: '/dashboard/profileUser',
         icon: 'feather icon-user'
-      },
-      {
-        id: 'AddUser',
-        title: 'AddUser',
-        type: 'item',
-        url: '/dashboard/AddUser',
-        icon: 'feather icon-user'
-      },
+      }
+     
+      
     ]
   },
   {
@@ -63,20 +53,36 @@ const NavigationItems = [
     icon: 'feather icon-list',
     children: [
       {
-        id: 'listUser',
-        title: 'listUser',
+        id: 'Dashbord',
+        title: 'Dashbord',
         type: 'item',
-        url: '/dashboard/listUser',
-        icon: 'feather icon-server'
+        url: '/dashboard/analytics',
+        icon: 'feather icon-home'
+      },
+      
+     
+      {
+        id: 'ajouter_users',
+        title: 'ajouter_users',
+        type: 'item',
+        url: '/dashboard/AddUser',
+        icon: 'feather icon-user-plus'
       },
     
       {
-        id: 'listCompt',
-        title: 'listCompt',
+        id: 'Ajouter_SF',
+        title: 'Ajouter_SF',
         type: 'item',
-        url: '/consulter/listCompt',
-        icon: 'feather icon-server'
-      }
+        url: '/dashboard/Ajouter_SF',
+        icon: 'feather icon-file-plus'
+      },
+      {
+        id: 'Operation_UAA',
+        title: 'Operation_UAA',
+        type: 'item',
+        url: '/dashboard/Operation_UAA',
+        icon: 'feather icon-activity'
+      },
     ]
   },
   {
@@ -86,19 +92,26 @@ const NavigationItems = [
     icon: 'feather icon-list',
     children: [
       {
-        id: 'list_SF',
-        title: 'list_SF',
+        id: 'listUser',
+        title: 'consulter_users',
         type: 'item',
-        url: '/consulter/list_SF',
-        icon: 'feather icon-server'
+        url: '/dashboard/listUser',
+        icon: 'feather icon-list'
       },
-      /*{
+      {
+        id: 'list_SF',
+        title: 'Consulter_SF',
+        type: 'item',
+        url: '/dashboard/Consulter_SF',
+        icon: 'feather icon-list'
+      },
+      {
         id: 'listCompt',
         title: 'listCompt',
         type: 'item',
         url: '/consulter/listCompt',
-        icon: 'feather icon-server'
-      }*/
+        icon: 'feather icon-list'
+      },
     ]
   },
 
@@ -124,41 +137,27 @@ export class role {
     this.children = []
   }
 }
-
-const roles=[
- 
-  "Dashboard"  , 
-  "ProfileUser",
-  "AddUser",
-"listUser",
-
-]
+let rolesUser=[]
+let roles=[]
 @Injectable()
 export class NavigationItem {
+  constructor(private tokenStorage: TokenStorageServiceService,private approvalService:ApprovalService){}
   public get() {
+ let roles=this.tokenStorage.getRolesUser()
+ 
+ //console.log("session stora: "+roles);
+ 
+   // this.approvalService.currentApprovalStageMessage.subscribe(msg => roles=msg)
+  
+    
     let adminAllRoles: role[] = []
     
     //admin-space
     adminAllRoles:[] = [];
     let adminRole: role;
-    /*for (let i = 0; i < NavigationItems.length; i++) {
-      adminRole = new role();
-      adminRole.id = NavigationItems[i].id;
-      adminRole.title = NavigationItems[i].title;
-      adminRole.type = NavigationItems[i].type;
-      adminRole.icon = NavigationItems[i].icon;
-      console.log(adminRole);
-      for(let j=0;j<NavigationItems[i].children.length;i++){
-        if(roles.includes(NavigationItems[i].children[j].title)){
-          adminRole.children[adminRole.children.length]=NavigationItems[i].children[j];
-        }
-      }
-      if (adminRole.children.length !== 0) {
-        adminAllRoles[adminAllRoles.length] = adminRole
-      }
-    }*/
-  
+    
    if (roles) {
+    adminAllRoles[adminAllRoles.length]=NavigationItems[0]
       let adminRole: role;
       for (let i = 0; i < NavigationItems.length; i++) {
         adminRole = new role();
@@ -166,7 +165,7 @@ export class NavigationItem {
         adminRole.title = NavigationItems[i].title;
         adminRole.type = NavigationItems[i].type;
         adminRole.icon = NavigationItems[i].icon;
-        console.log(adminRole);
+  
         
         for (let j = 0; j < NavigationItems[i].children.length; j++) {
           if (roles.indexOf(NavigationItems[i].children[j].title) !== -1) {
@@ -178,10 +177,7 @@ export class NavigationItem {
         }
       }
     }
-    for(let i=0;i<adminAllRoles.length;i++){
-      console.log(adminAllRoles[i].id);
-      
-    }
+   
     //console.log(adminAllRoles);
 
     return adminAllRoles;

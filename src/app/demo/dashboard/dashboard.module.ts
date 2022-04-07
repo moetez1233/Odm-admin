@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import {SharedModule} from '../../theme/shared/shared.module';
+//import { ConsulterSfComponent } from './consulter-sf/consulter-sf.component';
+//import { ImportSfComponent } from './import-sf/import-sf.component';
 //import { ListUserComponent } from './list-user/list-user.component';
 //import { AddUserComponent } from './add-user/add-user.component';
 //import { ProfileUserComponent } from './profile-user/profile-user.component';

@@ -1,12 +1,13 @@
+import { AuthGuard } from 'src/auth.guard';
+import { ConsulterSfComponent } from './consulter-sf.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from 'src/auth.guard';
-import{ProfileUserComponent} from'./profile-user.component'
+
 
 const routes: Routes = [
   {
     path:'',
-    component:ProfileUserComponent,
+    component:ConsulterSfComponent,
     canActivate:[AuthGuard]
   }
 ];
@@ -15,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProfileUserRoutingModule { }
+export class ConsulterSfRoutingModule { }

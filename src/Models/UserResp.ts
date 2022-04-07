@@ -1,7 +1,6 @@
 import { roles } from "./roles";
 import {Token} from './Token'
 export class UserResp{
-    
     userId?:string;
     name?:string;
     adress?:string;
@@ -9,6 +8,7 @@ export class UserResp{
     phone_number?:string;
     email?:string;
     roles:roles[];
+    
 
     
 }

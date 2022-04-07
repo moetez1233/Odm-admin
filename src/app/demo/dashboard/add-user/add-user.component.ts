@@ -16,11 +16,12 @@ export class AddUserComponent implements OnInit {
   ListRolesChekedFinale=[]
   listOBjetRole=[]
   FirstPush=false
+  IsAdded=false
   checkboxesDataList = [
    
     {
       name: 'Navigation',
-      roles:['Dashbord','Ajouter SF'],
+      roles:['Dashbord','Ajouter_SF'],
       
       
     },
@@ -31,7 +32,7 @@ export class AddUserComponent implements OnInit {
     },
     {
       name: 'Consulter',
-      roles:['Consulter Etat SF','Consulter Status SF']
+      roles:['Consulter_SF','Operation_UAA']
       
     }
   ]
@@ -62,6 +63,7 @@ export class AddUserComponent implements OnInit {
   }
  async addAdmin(){
     if(!this.AddForm.invalid){
+      this.listOBjetRole=[]
       const name=""
       for(let i=0;i<this.ListRolesChekedFinale.length;i++){
         this.listOBjetRole.push({name:this.ListRolesChekedFinale[i]})
@@ -69,6 +71,7 @@ export class AddUserComponent implements OnInit {
     
      
     this.AddForm.value.roles= this.listOBjetRole
+    this.listOBjetRole=[]
     /*this.addUserService.AddUser(this.AddForm.value).subscribe(res=>{
       console.log(res);
       
@@ -76,7 +79,8 @@ export class AddUserComponent implements OnInit {
 console.log(this.AddForm.value);
 
     this.addUserService.createNewAdmin(this.AddForm.value).subscribe((res:any)=>{
-      console.log(res);
+      this.IsAdded=true;
+      this.AddForm.reset()
     })
     
     

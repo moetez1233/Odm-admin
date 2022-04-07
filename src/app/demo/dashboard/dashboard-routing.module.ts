@@ -21,6 +21,14 @@ const routes: Routes = [
         path: 'listUser',
         loadChildren: () => import('./list-user/list-user.module').then(module => module.ListUserModule)
       },
+      {
+        path: 'Ajouter_SF',
+        loadChildren: () => import('./import-sf/import-sf.module').then(module => module.ImportSfModule)
+      },
+      {
+        path: 'Consulter_SF',
+        loadChildren: () => import('./consulter-sf/consulter-sf.module').then(module => module.ConsulterSfModule)
+      },
     ]
   }
 ];

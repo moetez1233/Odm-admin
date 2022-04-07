@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import {URLS} from 'src/Constants/Constant'
@@ -11,7 +12,14 @@ export class ListUserService {
 
   constructor(private http:HttpClient) { }
 
-  listUser(){
+  listUser():Observable<any>{
     return this.http.get(URLS.ListUser);
+  }
+  DeleteUser(email:string):Observable<any>{
+    return this.http.delete(URLS.Delet +`/${email}`)
+    
+  }
+  UpdateUser(data):Observable<any>{
+    return this.http.put(URLS.Update,data);
   }
 }

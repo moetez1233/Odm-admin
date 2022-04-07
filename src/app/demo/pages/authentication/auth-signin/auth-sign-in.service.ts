@@ -18,5 +18,7 @@ constructor(private http:HttpClient){}
     return this.http.post(URLS.logIn,data,httpOptions);
   }
 
-
+TokenExist(){
+  return !!sessionStorage.getItem("tokenUser");
+}
 }

@@ -1,0 +1,177 @@
+<div class="row">
+    <div class="col-sm-12 m-b-15">
+        <div id="main-search" class="main-search open">
+            <div class="input-group">
+                <input type="text" id="m-search" class="form-control" placeholder="Search . . ." (keyup)="verifyingSearch($event)">
+                <span class="input-group-append search-btn btn btn-primary feather icon-search input-group-text" (click)="Search()">
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 m-b-15">
+        Chercher le ShipmentFile avec status :
+        <div class="custom-control custom-radio custom-control-inline" style="margin-left: 2%;">
+            <input type="radio" id="customRadioInline1" name="customRadioInline1" value="Import-Aborded" #val class="custom-control-input" (click)="cherchStatus(val)">
+            <label class="custom-control-label" for="customRadioInline1">Import-Aborded</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline2" name="customRadioInline1" value="Kms_Processing" #val1 class="custom-control-input" (click)="cherchStatus(val1)">
+            <label class="custom-control-label" for="customRadioInline2">Kms Processing</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline3" name="customRadioInline1" value="Odm_Processing" #val2 class="custom-control-input" (click)="cherchStatus(val2)">
+            <label class="custom-control-label" for="customRadioInline3">ODM Processing</label>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <app-card [options]="false" cardTitle="Liste des ShipmentFiles">
+            <perfect-scrollbar style="min-height: 10px;max-height: 280px;">
+                <div class="col-md-12">
+                    <ng-container>
+                        <ng-container *ngFor="let sf of shipmentFile;let SFIndex=index;">
+                            <app-alert style="cursor: pointer;" [type]="SfColor[SFIndex]" (mouseenter)="hoverOn(SFIndex)" (mouseleave)="hoverOff(SFIndex)" (click)="ShipmentFileClicked(SFIndex)">
+
+                                <div class="row" style="margin-left: -20px;margin-right: -10px;">
+                                    <div id="searche"></div>
+                                    <h6 class="col-md-12 text-left">{{sf.name}} </h6>
+                                </div>
+                            </app-alert>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </perfect-scrollbar>
+        </app-card>
+    </div>
+    <div class="col-md-8">
+        <app-card [hidHeader]="true" cardClass="tab-card" style="background-color: red;">
+            <h5 class="mb-3" style="text-align: center;">Information ShipmentFile</h5>
+            <ngb-tabset>
+                <ngb-tab title="Info">
+                    <ng-template ngbTabContent>
+                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
+                            <div class="table-responsive">
+                                <div class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th></th>
+                                            <th>{{clickedSf.name}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Type_compteur</th>
+                                            <th></th>
+                                            <th>{{clickedSf.type_compteur}}</th>
+
+                                        </tr>
+                                        <tr>
+                                            <tr>
+                                                <th>status</th>
+                                                <th></th>
+                                                <th>{{clickedSf.status}}</th>
+
+                                            </tr>
+                                    </tbody>
+                                </div>
+                            </div>
+                        </perfect-scrollbar>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="User">
+                    <ng-template ngbTabContent>
+                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
+                            <div class="table-responsive" *ngIf="!adminIndex">
+                                <table class="table">
+
+                                    <tbody>
+
+
+                                        <tr>
+                                            <th>Prénom</th>
+                                            <th>{{clickedSf.user.lastName}}</th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>{{clickedSf.user.name}}</th>
+                                            <th style="text-align: right;">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Numéro de Téléphone</th>
+                                            <th>{{clickedSf.user.phone_number}}</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>Cin</th>
+                                            <th>{{clickedSf.user.cin}}</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>Adresse Email</th>
+                                            <th>{{clickedSf.user.email}}</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>Adress</th>
+                                            <th>{{clickedSf.user.adress}}</th>
+
+                                        </tr>
+
+
+
+
+                                    </tbody>
+                                </table>
+                                <div class="col-sm-12">
+                                    <h5>Roles</h5>
+
+                                    <div class="row">
+
+
+                                        <ul class="col-md-4" *ngFor="let titleRole of clickedSf.user.roles; let rolTypeIndex=index ">
+
+                                            <li>{{titleRole.name}}</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </perfect-scrollbar>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Historique">
+                    <ng-template ngbTabContent>
+                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Status</th>
+                                            <th>Raison</th>
+                                            <th>Date de modefication</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody *ngFor="let hist of clickedSf.historiques">
+
+                                        <tr>
+
+                                            <td>{{hist.nomStatus}}</td>
+                                            <td>{{hist.raison}}</td>
+                                            <td>{{hist.idHistorique.modefication_sf | date:'medium'}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </perfect-scrollbar>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </app-card>
+    </div>
+</div>

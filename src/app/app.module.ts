@@ -1,3 +1,4 @@
+import { AuthGuard } from './../auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -60,7 +61,7 @@ import { TokenInterceptor } from 'src/TokenHed/token-inspector.service';
     HttpClientModule
   ],
   providers: [
-    NavigationItem,
+    NavigationItem,AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
