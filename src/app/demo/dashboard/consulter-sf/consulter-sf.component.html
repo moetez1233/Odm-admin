@@ -10,6 +10,7 @@
     </div>
     <div class="col-sm-12 m-b-15">
         Chercher le ShipmentFile avec status :
+
         <div class="custom-control custom-radio custom-control-inline" style="margin-left: 2%;">
             <input type="radio" id="customRadioInline1" name="customRadioInline1" value="Import-Aborded" #val class="custom-control-input" (click)="cherchStatus(val)">
             <label class="custom-control-label" for="customRadioInline1">Import-Aborded</label>
@@ -22,7 +23,13 @@
             <input type="radio" id="customRadioInline3" name="customRadioInline1" value="Odm_Processing" #val2 class="custom-control-input" (click)="cherchStatus(val2)">
             <label class="custom-control-label" for="customRadioInline3">ODM Processing</label>
         </div>
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline4" name="customRadioInline1" value="tous" #val4 class="custom-control-input" (click)="cherchStatus(val4)">
+            <label class="custom-control-label" for="customRadioInline4">Tous</label>
+        </div>
+
     </div>
+    <!--
     <div class="col-md-4">
         <app-card [options]="false" cardTitle="Liste des ShipmentFiles">
             <perfect-scrollbar style="min-height: 10px;max-height: 280px;">
@@ -33,7 +40,13 @@
 
                                 <div class="row" style="margin-left: -20px;margin-right: -10px;">
                                     <div id="searche"></div>
-                                    <h6 class="col-md-12 text-left">{{sf.name}} </h6>
+
+                                    <i class="col-md-9 text-left">
+                                        {{sf.name}}
+                                        <img width="10%" [src]=" sf.status ? (sf.status==Kms_Processing ? 'assets/images/IconAccept.png' : 'assets/images/IconRefused.png') : 'assets/images/IconInProgress.png'"
+                                            [title]="sf.status ? (sf.status==Kms_Processing ? 'Acceptée' : 'Kms_Processing') : 'En Cours'">
+                                           
+                                    </i>
                                 </div>
                             </app-alert>
                         </ng-container>
@@ -42,6 +55,8 @@
             </perfect-scrollbar>
         </app-card>
     </div>
+-->
+    <!--
     <div class="col-md-8">
         <app-card [hidHeader]="true" cardClass="tab-card" style="background-color: red;">
             <h5 class="mb-3" style="text-align: center;">Information ShipmentFile</h5>
@@ -58,7 +73,7 @@
                                             <th>{{clickedSf.name}}</th>
                                         </tr>
                                         <tr>
-                                            <th>Type_compteur</th>
+                                            <th>Type</th>
                                             <th></th>
                                             <th>{{clickedSf.type_compteur}}</th>
 
@@ -71,6 +86,11 @@
 
                                             </tr>
                                     </tbody>
+                                    <div style="text-align: center;" *ngIf="ISImportAbord">
+                                        <button type="button" class="btn btn-success">Resume</button>
+                                        <button type="button" class="btn btn-danger">Reject</button>
+
+                                    </div>
                                 </div>
                             </div>
                         </perfect-scrollbar>
@@ -138,6 +158,195 @@
                                 </div>
                             </div>
                         </perfect-scrollbar>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Historique">
+                    <ng-template ngbTabContent>
+                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Status</th>
+                                            <th>Raison</th>
+                                            <th>Date de modefication</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody *ngFor="let hist of clickedSf.historiques">
+
+                                        <tr>
+
+                                            <td>{{hist.nomStatus}}</td>
+                                            <td>{{hist.raison}}</td>
+                                            <td>{{hist.idHistorique.modefication_sf | date:'medium'}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </perfect-scrollbar>
+                    </ng-template>
+                </ngb-tab>
+            </ngb-tabset>
+        </app-card>
+    </div>
+-->
+    <div class="col-md-12" *ngIf="!ShowDetails">
+        <app-card cardTitle="Listes ShipmentFiles" blockClass="table-border-style">
+
+            <div class="table table-hover">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Nom</th>
+                            <th>Type </th>
+                            <th>Status</th>
+                            <th>Détails</th>
+                        </tr>
+                    </thead>
+
+                    <tbody *ngFor="let sf of shipmentFile;let SFIndex=index;">
+                        <tr style="cursor: pointer;">
+                            <td>{{SFIndex}}</td>
+                            <td>{{sf.name}}</td>
+                            <td>{{sf.type_compteur}}</td>
+
+
+                            <td>
+
+
+                                <div [ngClass]="{'ValidStat' : sf.status=='Uploaded','InvalidStat' :sf.status=='Kms_Processing' }">{{sf.status}}</div>
+
+                            </td>
+                            <td>
+                                <div class="voirDetails" (click)="ShipmentFileClicked(SFIndex)">
+                                    <span>VoirDétails</span> <i class="feather icon-eye"></i>
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </app-card>
+    </div>
+    <div class="col-md-12" *ngIf="ShowDetails">
+        <app-card cardTitle="Deatils ShipmentFile" blockClass="table-border-style">
+            <p class="col-md-12 text-right" id="ListSF" (click)="ReturnToList()">listes des Sfipenetfile <i class="feather icon-corner-down-left"></i></p>
+            <ngb-tabset>
+                <ngb-tab title="Info">
+                    <ng-template ngbTabContent>
+                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
+                            <div class="table-responsive">
+                                <div class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th></th>
+                                            <th>{{clickedSf.name}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th></th>
+                                            <th>{{clickedSf.type_compteur}}</th>
+
+                                        </tr>
+                                        <tr>
+                                            <tr>
+                                                <th>status</th>
+                                                <th></th>
+                                                <th>{{clickedSf.status}}</th>
+
+                                            </tr>
+                                    </tbody>
+                                    <div style="text-align: center;" *ngIf="ISImportAbord">
+                                        <button type="button" class="btn btn-success">Resume</button>
+                                        <button type="button" class="btn btn-danger">Reject</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </perfect-scrollbar>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="User">
+                    <ng-template ngbTabContent>
+                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
+                            <div class="table-responsive" *ngIf="DragDrop">
+                                <table class="table">
+
+                                    <tbody>
+
+
+                                        <tr>
+                                            <th>Prénom</th>
+                                            <th>{{clickedSf.user.lastName}}</th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>{{clickedSf.user.name}}</th>
+                                            <th style="text-align: right;">
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>Numéro de Téléphone</th>
+                                            <th>{{clickedSf.user.phone_number}}</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>Cin</th>
+                                            <th>{{clickedSf.user.cin}}</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>Adresse Email</th>
+                                            <th>{{clickedSf.user.email}}</th>
+
+                                        </tr>
+                                        <tr>
+                                            <th>Adress</th>
+                                            <th>{{clickedSf.user.adress}}</th>
+
+                                        </tr>
+
+
+
+
+                                    </tbody>
+                                </table>
+                                <div class="col-sm-12">
+                                    <h5>Roles</h5>
+
+                                    <div class="row">
+
+
+                                        <ul class="col-md-4" *ngFor="let titleRole of clickedSf.user.roles; let rolTypeIndex=index ">
+
+                                            <li>{{titleRole.name}}</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </perfect-scrollbar>
+                        <div *ngIf="!DragDrop">
+                            <p style="margin-top: 2%;">SfipmentFile est ajouter avec Drag && Drop</p>
+                        </div>
                     </ng-template>
                 </ngb-tab>
                 <ngb-tab title="Historique">

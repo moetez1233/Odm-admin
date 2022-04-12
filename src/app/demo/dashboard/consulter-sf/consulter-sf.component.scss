@@ -1,0 +1,23 @@
+#ListSF {
+    color: black;
+    text-decoration: underline black;
+}
+
+#ListSF:hover {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline blue;
+}
+
+.InvalidStat {
+    color: red;
+}
+
+.ValidStat {
+    color: green;
+}
+
+.voirDetails:hover {
+    color: blue;
+    text-decoration: underline blue;
+}
