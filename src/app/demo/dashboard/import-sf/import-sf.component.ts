@@ -39,10 +39,13 @@ export class ImportSfComponent implements OnInit {
         // this.fileName = file.name +" is uploaded Successfully"
 
         this.files.push({ data: file, inProgress: false, progress: 0 });
+        this.showProgrssBar = true;
         this.uploadFiles();
+        this.showProgrssBar = false;
       } else {
         this.showProgrssBar = false;
         this.fileName = file.name + " is not uploaded ";
+        
       }
     };
     fileUpload.click();
@@ -67,6 +70,7 @@ export class ImportSfComponent implements OnInit {
       (res) => {
         this.ErrorUplad = res.error;
         this.fileName = this.ErrorUplad.split(":")[1];
+        
         console.log(res.error);
       },
 

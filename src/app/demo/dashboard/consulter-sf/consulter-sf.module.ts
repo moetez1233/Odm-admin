@@ -1,3 +1,5 @@
+import { BreadcrumbPagingRoutingModule } from './../../ui-elements/ui-basic/breadcrumb-paging/breadcrumb-paging-routing.module';
+import { BreadcrumbPagingComponent } from './../../ui-elements/ui-basic/breadcrumb-paging/breadcrumb-paging.component';
 import { BasicCarouselComponent } from './../../ui-elements/ui-basic/basic-carousel/basic-carousel.component';
 import { BasicTabsPillsComponent } from './../../ui-elements/ui-basic/basic-tabs-pills/basic-tabs-pills.component';
 import { ConsulterSfComponent } from './consulter-sf.component';
@@ -20,9 +22,12 @@ import { StorageServiceModule } from 'angular-webstorage-service';
 import { BasicTabsPillsRoutingModule } from './../../ui-elements/ui-basic/basic-tabs-pills/basic-tabs-pills-routing.module';
 
 /*  end required tabs Module  */
+/*  required for pagination  */
+import {NgbButtonsModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
+/*  required for pagination  */
 
 @NgModule({
-  declarations: [BasicCarouselComponent,ConsulterSfComponent,BasicTabsPillsComponent],
+  declarations: [BasicCarouselComponent,ConsulterSfComponent,BasicTabsPillsComponent,BreadcrumbPagingComponent],
   imports: [
     CommonModule,
     ConsulterSfRoutingModule,
@@ -32,7 +37,9 @@ import { BasicTabsPillsRoutingModule } from './../../ui-elements/ui-basic/basic-
     StorageServiceModule,
     SharedModule,
     BasicTabsPillsRoutingModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    NgbButtonsModule, NgbPaginationModule,
+    BreadcrumbPagingRoutingModule
   ]
 })
 export class ConsulterSfModule { }

@@ -1,6 +1,7 @@
 import { AllUser } from 'src/Models/AllUser';
 import { Historique } from './Historique';
 export class ShipmentFile{
+    id?:string;
     name?:string;
     type_compteur?:string;
     status?:string;

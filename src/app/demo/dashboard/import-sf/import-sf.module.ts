@@ -1,3 +1,4 @@
+import { BasicSpinnerComponent } from './../../ui-elements/ui-basic/basic-spinner/basic-spinner.component';
 import { ImportSfComponent } from './import-sf.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,7 @@ import { StorageServiceModule } from 'angular-webstorage-service';
 
 /* required for working page   */
 @NgModule({
-  declarations: [ImportSfComponent],
+  declarations: [ImportSfComponent,BasicSpinnerComponent],
   imports: [
     CommonModule,
     ImportSfRoutingModule,

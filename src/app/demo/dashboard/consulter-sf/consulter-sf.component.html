@@ -8,6 +8,7 @@
             </div>
         </div>
     </div>
+    <!--
     <div class="col-sm-12 m-b-15">
         Chercher le ShipmentFile avec status :
 
@@ -29,222 +30,69 @@
         </div>
 
     </div>
-    <!--
-    <div class="col-md-4">
-        <app-card [options]="false" cardTitle="Liste des ShipmentFiles">
-            <perfect-scrollbar style="min-height: 10px;max-height: 280px;">
-                <div class="col-md-12">
-                    <ng-container>
-                        <ng-container *ngFor="let sf of shipmentFile;let SFIndex=index;">
-                            <app-alert style="cursor: pointer;" [type]="SfColor[SFIndex]" (mouseenter)="hoverOn(SFIndex)" (mouseleave)="hoverOff(SFIndex)" (click)="ShipmentFileClicked(SFIndex)">
-
-                                <div class="row" style="margin-left: -20px;margin-right: -10px;">
-                                    <div id="searche"></div>
-
-                                    <i class="col-md-9 text-left">
-                                        {{sf.name}}
-                                        <img width="10%" [src]=" sf.status ? (sf.status==Kms_Processing ? 'assets/images/IconAccept.png' : 'assets/images/IconRefused.png') : 'assets/images/IconInProgress.png'"
-                                            [title]="sf.status ? (sf.status==Kms_Processing ? 'Acceptée' : 'Kms_Processing') : 'En Cours'">
-                                           
-                                    </i>
-                                </div>
-                            </app-alert>
-                        </ng-container>
-                    </ng-container>
-                </div>
-            </perfect-scrollbar>
-        </app-card>
-    </div>
 -->
-    <!--
-    <div class="col-md-8">
-        <app-card [hidHeader]="true" cardClass="tab-card" style="background-color: red;">
-            <h5 class="mb-3" style="text-align: center;">Information ShipmentFile</h5>
-            <ngb-tabset>
-                <ngb-tab title="Info">
-                    <ng-template ngbTabContent>
-                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
-                            <div class="table-responsive">
-                                <div class="table">
-                                    <tbody>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th></th>
-                                            <th>{{clickedSf.name}}</th>
-                                        </tr>
-                                        <tr>
-                                            <th>Type</th>
-                                            <th></th>
-                                            <th>{{clickedSf.type_compteur}}</th>
 
-                                        </tr>
-                                        <tr>
-                                            <tr>
-                                                <th>status</th>
-                                                <th></th>
-                                                <th>{{clickedSf.status}}</th>
-
-                                            </tr>
-                                    </tbody>
-                                    <div style="text-align: center;" *ngIf="ISImportAbord">
-                                        <button type="button" class="btn btn-success">Resume</button>
-                                        <button type="button" class="btn btn-danger">Reject</button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </perfect-scrollbar>
-                    </ng-template>
-                </ngb-tab>
-                <ngb-tab title="User">
-                    <ng-template ngbTabContent>
-                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
-                            <div class="table-responsive" *ngIf="!adminIndex">
-                                <table class="table">
-
-                                    <tbody>
-
-
-                                        <tr>
-                                            <th>Prénom</th>
-                                            <th>{{clickedSf.user.lastName}}</th>
-                                            <th>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>{{clickedSf.user.name}}</th>
-                                            <th style="text-align: right;">
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th>Numéro de Téléphone</th>
-                                            <th>{{clickedSf.user.phone_number}}</th>
-
-                                        </tr>
-                                        <tr>
-                                            <th>Cin</th>
-                                            <th>{{clickedSf.user.cin}}</th>
-
-                                        </tr>
-                                        <tr>
-                                            <th>Adresse Email</th>
-                                            <th>{{clickedSf.user.email}}</th>
-
-                                        </tr>
-                                        <tr>
-                                            <th>Adress</th>
-                                            <th>{{clickedSf.user.adress}}</th>
-
-                                        </tr>
-
-
-
-
-                                    </tbody>
-                                </table>
-                                <div class="col-sm-12">
-                                    <h5>Roles</h5>
-
-                                    <div class="row">
-
-
-                                        <ul class="col-md-4" *ngFor="let titleRole of clickedSf.user.roles; let rolTypeIndex=index ">
-
-                                            <li>{{titleRole.name}}</li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </perfect-scrollbar>
-                    </ng-template>
-                </ngb-tab>
-                <ngb-tab title="Historique">
-                    <ng-template ngbTabContent>
-                        <perfect-scrollbar style="min-height: 10px;max-height: 245px;">
-
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-
-                                            <th>Status</th>
-                                            <th>Raison</th>
-                                            <th>Date de modefication</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody *ngFor="let hist of clickedSf.historiques">
-
-                                        <tr>
-
-                                            <td>{{hist.nomStatus}}</td>
-                                            <td>{{hist.raison}}</td>
-                                            <td>{{hist.idHistorique.modefication_sf | date:'medium'}}</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </perfect-scrollbar>
-                    </ng-template>
-                </ngb-tab>
-            </ngb-tabset>
-        </app-card>
-    </div>
--->
     <div class="col-md-12" *ngIf="!ShowDetails">
         <app-card cardTitle="Listes ShipmentFiles" blockClass="table-border-style">
+            <perfect-scrollbar style="min-height: 10px;max-height: 500px;">
+                <div class="table table-hover">
 
-            <div class="table table-hover">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Numéro</th>
+                                <th>Nom</th>
+                                <th>Type </th>
+                                <th>Status</th>
+                                <th>Nbr Compteur</th>
+                                <th>Détails</th>
+                            </tr>
+                        </thead>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Numéro</th>
-                            <th>Nom</th>
-                            <th>Type </th>
-                            <th>Status</th>
-                            <th>Détails</th>
-                        </tr>
-                    </thead>
-
-                    <tbody *ngFor="let sf of shipmentFile;let SFIndex=index;">
-                        <tr style="cursor: pointer;">
-                            <td>{{SFIndex}}</td>
-                            <td>{{sf.name}}</td>
-                            <td>{{sf.type_compteur}}</td>
-
-
-                            <td>
+                        <tbody *ngFor="let sf of shipmentFile;let SFIndex=index;">
+                            <tr style="cursor: pointer;">
+                                <td>{{sf.id}}</td>
+                                <td>{{sf.name}}</td>
 
 
-                                <div [ngClass]="{'ValidStat' : sf.status=='Uploaded','InvalidStat' :sf.status=='Kms_Processing' }">{{sf.status}}</div>
-
-                            </td>
-                            <td>
-                                <div class="voirDetails" (click)="ShipmentFileClicked(SFIndex)">
-                                    <span>VoirDétails</span> <i class="feather icon-eye"></i>
-                                </div>
-
-                            </td>
-
-                        </tr>
+                                <td>{{sf.type_compteur}}</td>
 
 
-                    </tbody>
+                                <td>
 
-                </table>
 
-            </div>
+                                    <div [ngClass]="{'ValidStat' : sf.status=='Provisioned','Encour' : sf.status=='Odm_Processing' || sf.status=='Kms_Processing','InvalidStat' :sf.status=='Rejected' || sf.status=='Import-Aborded'  }">{{sf.status}}
+                                        <i class="feather" [ngClass]="{'icon-x-circle':sf.status=='Rejected' || sf.status=='Import-Aborded' ,'icon-loader':sf.status=='Odm_Processing'}"></i> </div>
+
+                                </td>
+                                <td>{{sf.nbr_meters}}</td>
+
+                                <td>
+                                    <div class="voirDetails" (click)="ShipmentFileClicked(SFIndex)">
+                                        <span>VoirDétails</span> <i class="feather icon-eye"></i>
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+            </perfect-scrollbar>
+            <ngb-pagination style="margin-top: 1%;" class="d-flex justify-content-center" [collectionSize]="120" [(page)]="page" [maxSize]="8" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChange()"></ngb-pagination>
 
         </app-card>
     </div>
     <div class="col-md-12" *ngIf="ShowDetails">
-        <app-card cardTitle="Deatils ShipmentFile" blockClass="table-border-style">
+        <app-card cardTitle="{{clickedSf.name}}" blockClass="table-border-style">
             <p class="col-md-12 text-right" id="ListSF" (click)="ReturnToList()">listes des Sfipenetfile <i class="feather icon-corner-down-left"></i></p>
+
             <ngb-tabset>
                 <ngb-tab title="Info">
                     <ng-template ngbTabContent>
@@ -270,10 +118,17 @@
                                                 <th>{{clickedSf.status}}</th>
 
                                             </tr>
+                                            <tr>
+                                                <tr>
+                                                    <th>Date De changement</th>
+                                                    <th></th>
+                                                    <th>{{DateChangement_Status | date:'medium'}}</th>
+
+                                                </tr>
                                     </tbody>
                                     <div style="text-align: center;" *ngIf="ISImportAbord">
-                                        <button type="button" class="btn btn-success">Resume</button>
-                                        <button type="button" class="btn btn-danger">Reject</button>
+                                        <button type="button" class="btn btn-success" *ngIf="ISImportAbord_KMS" (click)="ResumerSF(clickedSf.name)">Resume</button>
+                                        <button type="button" class="btn btn-danger" (click)="RejecterSF(clickedSf.name)">Reject</button>
 
                                     </div>
                                 </div>
@@ -364,7 +219,7 @@
                                         </tr>
                                     </thead>
 
-                                    <tbody *ngFor="let hist of clickedSf.historiques">
+                                    <tbody *ngFor="let hist of historiques">
 
                                         <tr>
 
@@ -374,10 +229,54 @@
                                         </tr>
 
                                     </tbody>
+
                                 </table>
                             </div>
 
                         </perfect-scrollbar>
+                    </ng-template>
+                </ngb-tab>
+                <ngb-tab title="Meters" *ngIf="showList_Meters">
+                    <ng-template ngbTabContent>
+                        <perfect-scrollbar style="min-height: 10px;max-height: 420px;">
+                            <div class="table table-hover">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Numéro</th>
+                                            <th>Type </th>
+                                            <th>Status</th>
+                                            <th>chanel</th>
+                                            <th>palet</th>
+                                            <th>Map</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody *ngFor="let meter of meters;let MeterIndex=index;">
+                                        <tr style="cursor: pointer;">
+                                            <td>{{meter.id}}</td>
+                                            <td>{{meter.type}}</td>
+                                            <td>{{meter.status}}</td>
+                                            <td>{{meter.chanel}}</td>
+                                            <td>{{meter.palet}}</td>
+                                            <td>#</td>
+
+
+
+                                        </tr>
+
+
+                                    </tbody>
+
+
+                                </table>
+
+
+                            </div>
+                        </perfect-scrollbar>
+                        <ngb-pagination style="margin-top: 1%;" class="d-flex justify-content-center" [collectionSize]="200000" [(page)]="pageMeter" [maxSize]="8" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChangeMeter()"></ngb-pagination>
+
                     </ng-template>
                 </ngb-tab>
             </ngb-tabset>

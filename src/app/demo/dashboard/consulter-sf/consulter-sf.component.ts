@@ -1,3 +1,5 @@
+import { Meters } from './../../../../Models/Meters';
+import { Historique } from './../../../../Models/ShipmentFileINfo/Historique';
 import { ShipmentFile } from './../../../../Models/ShipmentFileINfo/ShipementFile';
 import { ConsulterSfService } from './consulter-sf.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,12 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsulterSfComponent implements OnInit {
 shipmentFile:ShipmentFile[]
+meters:Meters[]
+historiques:Historique[]
+DateChangement_Status:string;
 clickedSf:ShipmentFile =new ShipmentFile()
 adminIndex = false;
 DragDrop=true;
 ISImportAbord=false;
+ISImportAbord_KMS=false;
 SfColor = []
 ShowDetails=false
+showList_Meters=false;
+page = 1
+pageMeter=1
+MaxSize=5
 
   constructor(private consulterSfService:ConsulterSfService) { }
 
@@ -22,21 +32,38 @@ ShowDetails=false
     this.AllSF()
     console.log("hello");
     
-    setInterval(()=>{this. AllSF(); console.log("hello");},1000)
+    /*setInterval(()=>{this. AllSF(); console.log("hello");},1000)*/
   }
   AllSF(){
-    this.consulterSfService.getAllSf().subscribe( (res)=>{
+    this.consulterSfService.getAllSf(1).subscribe( (res)=>{
+      console.log(res);
+      
      this.shipmentFile=res as ShipmentFile[];
-      console.log(this.shipmentFile[0].user.name);
+      console.log(this.shipmentFile[0]);
+     
       
       }  )
   }
+  
+  pageChange(){
+    this.consulterSfService.getAllSf(this.page).subscribe( (res)=>{
+      console.log(res);
+      
+     this.shipmentFile=res as ShipmentFile[];
+      console.log(this.shipmentFile[0]);
+   
+      
+      }  )
+   
+  }
   ShipmentFileClicked(index){
+   
     this.ShowDetails=true;
     this.clickedSf=this.shipmentFile[index];
+    this.HistoriqueSF(this.clickedSf.name);
     this.ISImportAbord=false;
     console.log(this.clickedSf.user);
-    
+    this.MetersSf(this.clickedSf.name,1)
     if(this.clickedSf.status=="Import-Aborded"){
       this.ISImportAbord=true;
     }
@@ -50,6 +77,41 @@ ShowDetails=false
     
     console.log(this.clickedSf.historiques[0].idHistorique.modefication_sf);
     
+  }
+  MetersSf(nameS,fnpage){
+    this.showList_Meters=false;
+this.consulterSfService.getAllMeters(nameS,fnpage).subscribe((res)=>{
+  console.log(res);
+  
+  this.meters=res as Meters[]
+console.log(this.meters.length);
+
+if(this.meters.length!=0){
+ 
+  this.showList_Meters=true;
+}
+
+  
+})
+  }
+
+  pageChangeMeter(){
+  this.consulterSfService.getAllMeters(this.clickedSf.name,this.pageMeter).subscribe((res)=>{
+    this.meters=res as Meters[]
+  })
+  }
+  HistoriqueSF(nameSf){
+    this.consulterSfService.getHistBySF(nameSf).subscribe( (res)=>{
+      console.log(res);
+      this.ISImportAbord_KMS=true;
+     this.historiques=res as Historique[];
+     console.log(this.historiques[this.historiques.length-1].nomStatus);
+     this.DateChangement_Status=this.historiques[this.historiques.length-1].idHistorique.modefication_sf
+     if(this.historiques[this.historiques.length-1].raison=="Kms return Process-Error"){
+     
+       this.ISImportAbord_KMS=false;
+     }
+      }  )
   }
   ReturnToList(){
     this.ShowDetails=false;
@@ -72,7 +134,7 @@ ShowDetails=false
   cherchStatus(status){
     this.ISImportAbord=false;
     if(status.value=="tous"){
-      this. AllSF()
+      this.AllSF()
    
     }
   
@@ -82,6 +144,27 @@ ShowDetails=false
    })
    
   }
- 
+  RejecterSF(nameSf){
+    this.consulterSfService.Reject_SF(nameSf).subscribe(
+      res=>{
+console.log(res);
 
+  this.AllSF()
+  this.pageChangeMeter()
+  this.ReturnToList()
+
+    })
+  }
+  ResumerSF(nameSf){
+    this.consulterSfService.Resume_SF_Serv(nameSf).subscribe(
+      res=>{
+console.log(res);
+
+  this.AllSF()
+  this.pageChangeMeter()
+  this.ReturnToList()
+
+    })
+  }
+ 
 }
