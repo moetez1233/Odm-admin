@@ -16,6 +16,9 @@ getAllSf(page:any):Observable<any>{
   getAllMeters(nameSf:string,page:any):Observable<any>{
     return this.http.get(URLS.Get_Meters_By_SF+`/${nameSf}`+`?page=${page}`);
   }
+  getAllMetersGAZ(nameSf:string,page:any):Observable<any>{
+    return this.http.get(URLS.Get_Meters_GAZ_By_SF+`/${nameSf}`+`?page=${page}`);
+  }
 
   getSfByStatus(status:string){
    

@@ -7,4 +7,6 @@ export class ShipmentFile{
     status?:string;
     user:AllUser
     historiques?:Historique[]
+    nbr_meters?:string;
+    nbr_Resume?:string;
 }

@@ -12,6 +12,7 @@ export class URLS{
     static GetSFByStatus=URLS.serverPath+"/api/users/getSfStat"
     static GetHist_By_SF=URLS.serverPath+"/api/users/listHistSf"
     static Get_Meters_By_SF=URLS.serverPath+"/api/users/getMeterSf"
+    static Get_Meters_GAZ_By_SF=URLS.serverPath+"/api/users/getMeterGAZSf"
     static Reject_SF=URLS.serverPath+"/api/users/rejectSf"
     static Resume_SF=URLS.serverPath+"/api/users/resumeSf"
     /* ===================== end SF ==================== */

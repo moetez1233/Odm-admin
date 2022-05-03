@@ -126,10 +126,10 @@
 
                                                 </tr>
                                     </tbody>
-                                    <div style="text-align: center;" *ngIf="ISImportAbord">
+                                    <div style="text-align: center; margin-top: -2%;" *ngIf="ISImportAbord">
                                         <button type="button" class="btn btn-success" *ngIf="ISImportAbord_KMS" (click)="ResumerSF(clickedSf.name)">Resume</button>
                                         <button type="button" class="btn btn-danger" (click)="RejecterSF(clickedSf.name)">Reject</button>
-
+                                        <p style="margin-top: 2%;">Vous Avez encore {{msg_nbr_Resume}} tentative de resume </p>
                                     </div>
                                 </div>
                             </div>
@@ -245,10 +245,12 @@
                                     <thead>
                                         <tr>
                                             <th>Numéro</th>
-                                            <th>Type </th>
+                                            <th>Communication methode </th>
+                                            <th>Type</th>
                                             <th>Status</th>
-                                            <th>chanel</th>
-                                            <th>palet</th>
+                                            <th>Connected</th>
+                                            <th>Amr_Router</th>
+                                            <th *ngIf="Show_Cahnnel">Channel</th>
                                             <th>Map</th>
                                         </tr>
                                     </thead>
@@ -256,14 +258,13 @@
                                     <tbody *ngFor="let meter of meters;let MeterIndex=index;">
                                         <tr style="cursor: pointer;">
                                             <td>{{meter.id}}</td>
-                                            <td>{{meter.type}}</td>
+                                            <td>{{meter.communication_method}}</td>
+                                            <td>{{meter.meter_Type}}</td>
                                             <td>{{meter.status}}</td>
-                                            <td>{{meter.chanel}}</td>
-                                            <td>{{meter.palet}}</td>
+                                            <td [ngClass]="{'ValidStat' :meter.is_Connected==true,'InvalidStat':meter.is_Connected==false}">{{meter.is_Connected}}</td>
+                                            <td>{{meter.amr_Router}}</td>
+                                            <td *ngIf="Show_Cahnnel">{{meter.channel}}</td>
                                             <td>#</td>
-
-
-
                                         </tr>
 
 
@@ -275,7 +276,7 @@
 
                             </div>
                         </perfect-scrollbar>
-                        <ngb-pagination style="margin-top: 1%;" class="d-flex justify-content-center" [collectionSize]="200000" [(page)]="pageMeter" [maxSize]="8" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChangeMeter()"></ngb-pagination>
+                        <ngb-pagination style="margin-top: 1%;" class="d-flex justify-content-center" [collectionSize]="300000" [(page)]="pageMeter" [maxSize]="8" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChangeMeter()"></ngb-pagination>
 
                     </ng-template>
                 </ngb-tab>

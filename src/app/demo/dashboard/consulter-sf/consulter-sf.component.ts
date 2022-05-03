@@ -1,3 +1,4 @@
+import { MetersGaz } from './../../../../Models/MetersGaz';
 import { Meters } from './../../../../Models/Meters';
 import { Historique } from './../../../../Models/ShipmentFileINfo/Historique';
 import { ShipmentFile } from './../../../../Models/ShipmentFileINfo/ShipementFile';
@@ -11,7 +12,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsulterSfComponent implements OnInit {
 shipmentFile:ShipmentFile[]
-meters:Meters[]
+meters:any
+Show_Cahnnel=false
+msg_nbr_Resume=""
 historiques:Historique[]
 DateChangement_Status:string;
 clickedSf:ShipmentFile =new ShipmentFile()
@@ -61,9 +64,19 @@ MaxSize=5
     this.ShowDetails=true;
     this.clickedSf=this.shipmentFile[index];
     this.HistoriqueSF(this.clickedSf.name);
+    this.msg_nbr_Resume=this.clickedSf.nbr_Resume;
     this.ISImportAbord=false;
     console.log(this.clickedSf.user);
-    this.MetersSf(this.clickedSf.name,1)
+    if(this.clickedSf.name.startsWith("AMM")){
+      
+      this.MetersSf(this.clickedSf.name,1)
+      this.Show_Cahnnel=false
+    
+    }
+    else {
+      this.MeterGazSF(this.clickedSf.name,1)
+      this.Show_Cahnnel=true
+    }
     if(this.clickedSf.status=="Import-Aborded"){
       this.ISImportAbord=true;
     }
@@ -84,7 +97,7 @@ this.consulterSfService.getAllMeters(nameS,fnpage).subscribe((res)=>{
   console.log(res);
   
   this.meters=res as Meters[]
-console.log(this.meters.length);
+console.log(this.meters[0]);
 
 if(this.meters.length!=0){
  
@@ -94,11 +107,34 @@ if(this.meters.length!=0){
   
 })
   }
+MeterGazSF(nameS,fnpage){
+  this.showList_Meters=false;
+this.consulterSfService.getAllMetersGAZ(nameS,fnpage).subscribe((res)=>{
+console.log(res);
 
+this.meters=res as MetersGaz[]
+console.log(this.meters[0]);
+
+if(this.meters.length!=0){
+
+this.showList_Meters=true;
+}
+
+
+})
+}
   pageChangeMeter(){
-  this.consulterSfService.getAllMeters(this.clickedSf.name,this.pageMeter).subscribe((res)=>{
-    this.meters=res as Meters[]
-  })
+    console.log(this.pageMeter);
+    if(this.clickedSf.name.startsWith("AMM")){
+      this.consulterSfService.getAllMeters(this.clickedSf.name,this.pageMeter).subscribe((res)=>{
+        this.meters=res as Meters[]
+      })
+    }else{
+      this.consulterSfService.getAllMetersGAZ(this.clickedSf.name,this.pageMeter).subscribe((res)=>{
+        this.meters=res as MetersGaz[]
+      })
+    }
+ 
   }
   HistoriqueSF(nameSf){
     this.consulterSfService.getHistBySF(nameSf).subscribe( (res)=>{
@@ -158,7 +194,7 @@ console.log(res);
   ResumerSF(nameSf){
     this.consulterSfService.Resume_SF_Serv(nameSf).subscribe(
       res=>{
-console.log(res);
+console.log(res.valueOf());
 
   this.AllSF()
   this.pageChangeMeter()
