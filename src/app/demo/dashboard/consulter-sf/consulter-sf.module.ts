@@ -1,3 +1,4 @@
+import { BasicModalComponent } from './../../ui-elements/ui-basic/basic-modal/basic-modal.component';
 import { BreadcrumbPagingRoutingModule } from './../../ui-elements/ui-basic/breadcrumb-paging/breadcrumb-paging-routing.module';
 import { BreadcrumbPagingComponent } from './../../ui-elements/ui-basic/breadcrumb-paging/breadcrumb-paging.component';
 import { BasicCarouselComponent } from './../../ui-elements/ui-basic/basic-carousel/basic-carousel.component';
@@ -15,7 +16,6 @@ import { NgbPopoverModule, NgbProgressbarModule, NgbTabsetModule, NgbTooltipModu
 import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule } from 'angular-webstorage-service';
 
-/* end from template   */
 
 /*  required for tabs Module */
 
@@ -27,7 +27,7 @@ import {NgbButtonsModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap'
 /*  required for pagination  */
 
 @NgModule({
-  declarations: [BasicCarouselComponent,ConsulterSfComponent,BasicTabsPillsComponent,BreadcrumbPagingComponent],
+  declarations: [BasicCarouselComponent,BasicModalComponent,ConsulterSfComponent,BasicTabsPillsComponent,BreadcrumbPagingComponent],
   imports: [
     CommonModule,
     ConsulterSfRoutingModule,

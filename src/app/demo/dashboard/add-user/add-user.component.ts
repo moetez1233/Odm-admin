@@ -17,6 +17,7 @@ export class AddUserComponent implements OnInit {
   listOBjetRole=[]
   FirstPush=false
   IsAdded=false
+  isEqual=false
   checkboxesDataList = [
    
     {
@@ -55,35 +56,56 @@ export class AddUserComponent implements OnInit {
       cin:['',Validators.required],
       email: ['', Validators.required],
       password:['',Validators.required],
+      Confirmpassword:['',Validators.required],
       roles:['',Validators.required]
 
       
       
     });
   }
+  ShowPassword(passwordUser){
+    if(passwordUser.type==="password"){
+      passwordUser.type="text"
+    }else  passwordUser.type="password"
+  }
+  Show_ConfiPassword(ConfirmPassword){
+    if(ConfirmPassword.type==="password"){
+      ConfirmPassword.type="text"
+    }else  ConfirmPassword.type="password"
+  }
  async addAdmin(){
-    if(!this.AddForm.invalid){
-      this.listOBjetRole=[]
-      const name=""
-      for(let i=0;i<this.ListRolesChekedFinale.length;i++){
-        this.listOBjetRole.push({name:this.ListRolesChekedFinale[i]})
-      }
-    
-     
-    this.AddForm.value.roles= this.listOBjetRole
-    this.listOBjetRole=[]
-    /*this.addUserService.AddUser(this.AddForm.value).subscribe(res=>{
-      console.log(res);
-      
-    })*/
-console.log(this.AddForm.value);
+   
+   const password=this.AddForm.value.password;
+   const confPass=this.AddForm.value.Confirmpassword
 
-    this.addUserService.createNewAdmin(this.AddForm.value).subscribe((res:any)=>{
-      this.IsAdded=true;
-      this.AddForm.reset()
-    })
-    
-    
+   
+    if(!this.AddForm.invalid){
+      if(password==confPass){
+        this.isEqual=false
+        this.listOBjetRole=[]
+        const name=""
+        for(let i=0;i<this.ListRolesChekedFinale.length;i++){
+          this.listOBjetRole.push({name:this.ListRolesChekedFinale[i]})
+        }
+      
+       
+      this.AddForm.value.roles= this.listOBjetRole
+      this.listOBjetRole=[]
+      /*this.addUserService.AddUser(this.AddForm.value).subscribe(res=>{
+        console.log(res);
+        
+      })*/
+  console.log(this.AddForm.value);
+  
+      this.addUserService.createNewAdmin(this.AddForm.value).subscribe((res:any)=>{
+        this.IsAdded=true;
+        this.AddForm.reset()
+      })
+      
+      
+      
+      }else {this.isEqual=true}
+     
      
       
     }

@@ -1,4 +1,44 @@
 export class ChartDB {
+  public static accountCAC_1 = {
+    chart: {
+      type: 'area',
+      height: 215,
+      sparkline: {
+        enabled: true
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    colors: ['#4680ff', '#0e9e4a', '#ff5252'],
+    stroke: {
+      curve: 'smooth',
+      width: 2,
+    },
+    series: [{
+      name: 'series1',
+      data: [20, 90, 65, 85, 20, 80, 30]
+    }, {
+      name: 'series2',
+      data: [70, 30, 40, 15, 60, 40, 95]
+    }],
+    tooltip: {
+      fixed: {
+        enabled: false
+      },
+      x: {
+        show: false
+      },
+      y: {
+        title: {
+          formatter: (seriesName) => ''
+        }
+      },
+      marker: {
+        show: false
+      }
+    }
+  };
     public static accountCAC = {
       chart: {
         type: 'area',

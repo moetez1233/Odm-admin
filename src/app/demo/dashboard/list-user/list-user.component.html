@@ -3,7 +3,7 @@
     <div class="col-sm-12 m-b-15">
         <div id="main-search" class="main-search open">
             <div class="input-group">
-                <input type="text" id="m-search" class="form-control" placeholder="Search . . ." (keyup)="verifyingSearch($event)">
+                <input type="text" value="" [(ngModel)]="search" id="m-search" class="form-control" placeholder="Search . . ." (click)="UserSearch()" (keyup)="UserSearch($event) ">
                 <span class="input-group-append search-btn btn btn-primary feather icon-search input-group-text" (click)="Search()">
                 </span>
             </div>

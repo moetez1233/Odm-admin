@@ -29,6 +29,10 @@ const routes: Routes = [
         path: 'Consulter_SF',
         loadChildren: () => import('./consulter-sf/consulter-sf.module').then(module => module.ConsulterSfModule)
       },
+      {
+        path: 'MapMeters',
+        loadChildren: () => import('./meter-map/meter-map.module').then(module => module.MeterMapModule)
+      },
     ]
   }
 ];

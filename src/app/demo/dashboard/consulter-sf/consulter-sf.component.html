@@ -1,17 +1,25 @@
 <div class="row">
-    <div class="col-sm-12 m-b-15">
+    <div class="col-sm-12 m-b-15" *ngIf="showSearch">
+
         <div id="main-search" class="main-search open">
             <div class="input-group">
-                <input type="text" id="m-search" class="form-control" placeholder="Search . . ." (keyup)="verifyingSearch($event)">
+                <input type="text" value="" [(ngModel)]="search" id="m-search" class="form-control" placeholder="Search . . ." (click)="SfSearch()" (keyup)="SfSearch($event) ">
                 <span class="input-group-append search-btn btn btn-primary feather icon-search input-group-text" (click)="Search()">
                 </span>
             </div>
         </div>
     </div>
-    <!--
-    <div class="col-sm-12 m-b-15">
-        Chercher le ShipmentFile avec status :
 
+    <div class="col-sm-12 m-b-15" *ngIf="showSearch">
+        Chercher Avec SfipementFile :
+        <div class="custom-control custom-radio custom-control-inline" style="margin-left: 2%;">
+            <input type="radio" id="customRadioInline5" name="customRadioInline1" value="Gaz" #val5 class="custom-control-input" (click)="GetSfByType(val5)">
+            <label class="custom-control-label" for="customRadioInline5">Gaz</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" style="margin-left: 2%;">
+            <input type="radio" id="customRadioInline7" name="customRadioInline1" value="ELEC" #val7 class="custom-control-input" (click)="GetSfByType(val7)">
+            <label class="custom-control-label" for="customRadioInline7">Electrique</label>
+        </div>
         <div class="custom-control custom-radio custom-control-inline" style="margin-left: 2%;">
             <input type="radio" id="customRadioInline1" name="customRadioInline1" value="Import-Aborded" #val class="custom-control-input" (click)="cherchStatus(val)">
             <label class="custom-control-label" for="customRadioInline1">Import-Aborded</label>
@@ -30,7 +38,7 @@
         </div>
 
     </div>
--->
+
 
     <div class="col-md-12" *ngIf="!ShowDetails">
         <app-card cardTitle="Listes ShipmentFiles" blockClass="table-border-style">
@@ -92,7 +100,20 @@
     <div class="col-md-12" *ngIf="ShowDetails">
         <app-card cardTitle="{{clickedSf.name}}" blockClass="table-border-style">
             <p class="col-md-12 text-right" id="ListSF" (click)="ReturnToList()">listes des Sfipenetfile <i class="feather icon-corner-down-left"></i></p>
+            <div class="col-sm-12 m-b-15 text-right" *ngIf="!showSearch">
 
+                Meters Activation_Failed :
+                <div class="custom-control custom-radio custom-control-inline" style="margin-left: 2%;">
+                    <input type="radio" id="customRadioInline8" name="customRadioInline1" value="Activation_Failed" #val8 class="custom-control-input" (click)="GetMetrActivationFailed(val8,clickedSf.name)">
+                    <label class="custom-control-label" for="customRadioInline8">Activation_Failed</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline" style="margin-left: 2%;">
+                    <input type="radio" id="customRadioInline9" name="customRadioInline1" value="Tous" #val9 class="custom-control-input" (click)="GetMetrActivationFailed(val9,clickedSf.name)">
+                    <label class="custom-control-label" for="customRadioInline9">Tous</label>
+                </div>
+
+
+            </div>
             <ngb-tabset>
                 <ngb-tab title="Info">
                     <ng-template ngbTabContent>
@@ -127,7 +148,7 @@
                                                 </tr>
                                     </tbody>
                                     <div style="text-align: center; margin-top: -2%;" *ngIf="ISImportAbord">
-                                        <button type="button" class="btn btn-success" *ngIf="ISImportAbord_KMS" (click)="ResumerSF(clickedSf.name)">Resume</button>
+                                        <button type="button" class="btn btn-success" *ngIf="ISImportAbord_KMS && clickedSf.nbr_meters" (click)="ResumerSF(clickedSf.name)">Resume</button>
                                         <button type="button" class="btn btn-danger" (click)="RejecterSF(clickedSf.name)">Reject</button>
                                         <p style="margin-top: 2%;">Vous Avez encore {{msg_nbr_Resume}} tentative de resume </p>
                                     </div>
@@ -238,33 +259,47 @@
                 </ngb-tab>
                 <ngb-tab title="Meters" *ngIf="showList_Meters">
                     <ng-template ngbTabContent>
+
                         <perfect-scrollbar style="min-height: 10px;max-height: 420px;">
+
                             <div class="table table-hover">
 
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Numéro</th>
-                                            <th>Communication methode </th>
+
                                             <th>Type</th>
                                             <th>Status</th>
                                             <th>Connected</th>
                                             <th>Amr_Router</th>
                                             <th *ngIf="Show_Cahnnel">Channel</th>
+                                            <th>Historique</th>
+                                            <th>ConfigParam</th>
                                             <th>Map</th>
                                         </tr>
                                     </thead>
 
                                     <tbody *ngFor="let meter of meters;let MeterIndex=index;">
                                         <tr style="cursor: pointer;">
-                                            <td>{{meter.id}}</td>
-                                            <td>{{meter.communication_method}}</td>
+                                            <td>{{meter.mrid}}</td>
+
                                             <td>{{meter.meter_Type}}</td>
-                                            <td>{{meter.status}}</td>
+                                            <td>{{meter.status}}<button style="margin-left: 2%;" *ngIf="meter.status=='Activation_Failed' && meter.nbrRetry!='3'" type="button" class="btn btn-outline-warning" ngbTooltip="Vous avez fait {{meter.nbrRetry}} retry "
+                                                    (click)="RetryMeterFailed(meter.mrid)">Retry <i class="feather icon-refresh-ccw"></i></button>
+                                                <button type="button" style="margin-left: 2%;" class="btn disabled btn-warning" *ngIf="meter.status=='Activation_Failed' && meter.nbrRetry=='3'" ngbTooltip="vous avez terminé le nombre de Retry=3">Retry <i class="feather icon-lock"></i></button>
+
+                                            </td>
                                             <td [ngClass]="{'ValidStat' :meter.is_Connected==true,'InvalidStat':meter.is_Connected==false}">{{meter.is_Connected}}</td>
                                             <td>{{meter.amr_Router}}</td>
                                             <td *ngIf="Show_Cahnnel">{{meter.channel}}</td>
-                                            <td>#</td>
+                                            <td *ngIf="meter.status=='Provisioned'">Voir hist <i class="feather icon-eye-off"></i></td>
+                                            <td class="History" (click)="ShowHistoMeter(exampleModalCenter,meter.mrid)" *ngIf="meter.status!='Provisioned'">Voir hist <i class="feather icon-eye"></i></td>
+                                            <td *ngIf="meter.status=='Provisioned' || meter.status=='Discovered'">Voir Confg<i class="feather icon-eye-off"></i></td>
+                                            <td class="History" (click)="ShowConfgInParam(exampleConfigParam,meter.mrid)" *ngIf="!(meter.status=='Provisioned' || meter.status=='Discovered')">Voir Confg <i class="feather icon-eye"></i></td>
+                                            <td *ngIf="meter.status=='Provisioned' || meter.status=='Discovered'">Voir Map<i class="feather icon-eye-off"></i></td>
+                                            <td class="History" (click)="ShowMap(exampleConfigParam1,MeterIndex)" *ngIf="!(meter.status=='Provisioned' || meter.status=='Discovered')">Voir Map <i class="feather icon-eye"></i></td>
+
                                         </tr>
 
 
@@ -283,4 +318,96 @@
             </ngb-tabset>
         </app-card>
     </div>
+
 </div>
+
+
+<app-ui-modal #exampleModalCenter [hideFooter]="true" [dialogClass]="'modal-lg'">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Historique </h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="exampleModalCenter.hide()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <perfect-scrollbar style="min-height: 10px;max-height: 420px;">
+            <div class="table table-hover">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Request Type</th>
+                            <th>Date de modefication</th>
+                            <th>Raison</th>
+                            <th>Nombre Retry</th>
+
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody *ngFor="let hsMeter of HitoriqueMeter">
+                        <tr style="cursor: pointer;">
+                            <td>{{hsMeter.requestType}}</td>
+                            <td>{{hsMeter.dateModefication | date:"medium"}}</td>
+                            <td>{{hsMeter.raison}}</td>
+                            <td>{{hsMeter.nbrRetry}}</td>
+
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+        </perfect-scrollbar>
+    </div>
+</app-ui-modal>
+<app-ui-modal #exampleConfigParam [hideFooter]="true" [dialogClass]="'modal-lg'">
+    <div class="app-modal-header">
+        <h5 class="modal-title">Config Param </h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="exampleConfigParam.hide()"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <div class="app-modal-body">
+        <perfect-scrollbar style="min-height: 10px;max-height: 420px;">
+            <div class="table table-hover">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>nom</th>
+                            <th>model_version</th>
+                            <th>Date d'ajout </th>
+                            <th>Current Value </th>
+                            <th>description</th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody *ngFor="let configInfo of configParamInfo;let MeterIndex=index;">
+                        <tr style="cursor: pointer;">
+                            <td>{{MeterIndex}}</td>
+                            <td>{{configInfo.configParamGeneral.nom}}</td>
+                            <td>{{configInfo.configParamGeneral.model_version}}</td>
+                            <td>{{configInfo.date_Ajout | date:'medium'}}</td>
+                            <th>{{configInfo.currentValue}} </th>
+                            <th>{{configInfo.configParamGeneral.description}} </th>
+
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+        </perfect-scrollbar>
+    </div>
+</app-ui-modal>

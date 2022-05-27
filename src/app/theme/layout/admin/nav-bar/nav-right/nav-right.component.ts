@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,7 +10,13 @@ import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class NavRightComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:Router) { }
 
   ngOnInit() { }
+  LogOut(){
+    sessionStorage.removeItem("tokenUser");
+    sessionStorage.removeItem("Email_User");
+    sessionStorage.removeItem("Roles");
+    this.route.navigateByUrl("/auth/signin")
+  }
 }

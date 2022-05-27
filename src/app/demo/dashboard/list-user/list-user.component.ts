@@ -24,6 +24,7 @@ export class ListUserComponent implements OnInit {
   checked=false
   indexListRole=-1
   indexChaqRole=-1
+  search: string = '';
   checkboxesDataList = [
    
     {
@@ -65,6 +66,7 @@ clickedAdmin: AllUser = new AllUser();
     });
     
     this.listUser()
+
   }
 
 
@@ -73,8 +75,29 @@ listUser(){
   this.listUserService.listUser().subscribe((res)=>{
     //console.log("result is "+res);
     this.allUser=res as AllUser[]
+    this.clickedAdmin=this.allUser[0]
+    this.UpdateConfirmed=true
+    console.log(this.clickedAdmin);
+    
   })
 
+}
+UserSearch(){
+  console.log(this.search);
+  if(this.search.length>0){
+    this.listUserService.GetSearchUer(this.search).subscribe((res)=>{
+      //console.log("result is "+res);
+      this.allUser=res as AllUser[]
+      console.log(this.allUser);
+      
+      this.clickedAdmin=this.allUser[0]
+      this.UpdateConfirmed=true
+      //console.log(this.clickedAdmin);
+      
+    })
+  }else this.listUser()
+  
+  
 }
 hoverOn(adminIndex) {
   if (adminIndex !== this.adminIndex)

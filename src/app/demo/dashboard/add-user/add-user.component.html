@@ -32,22 +32,41 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 ">
+                    <div class="col-md-3 ">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Cin</label>
-                            <input type="password" class="form-control" formControlName="cin" required [readonly]="isSubmitted">
+                            <input type="text" class="form-control" formControlName="cin" required [readonly]="isSubmitted">
                         </div>
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-3 ">
                         <div class="form-group">
                             <label style="font: bold;">email</label>
+
+
+
                             <input type="text" class="form-control" formControlName="email" required [readonly]="isSubmitted">
+
+
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="exampleInputNom1">mot de passe</label>
-                            <input type="password" class="form-control" formControlName="password" required [readonly]="isSubmitted">
+                            <div style="display: flex;">
+                                <input type="password" #passwordUser class="form-control" formControlName="password" required [readonly]="isSubmitted">
+                                <span class="input-group-append search-btn btn btn-primary feather icon-eye input-group-text" (click)="ShowPassword(passwordUser)">
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="exampleInputNom1">Confirme mot de passe</label>
+                            <div style="display: flex;">
+                                <input type="password" #Confi_passwordUser class="form-control" formControlName="Confirmpassword" required [readonly]="isSubmitted">
+                                <span class="input-group-append search-btn btn btn-primary feather icon-eye input-group-text" (click)="Show_ConfiPassword(Confi_passwordUser)">
+                            </span>
+                            </div>
                         </div>
                     </div>
 
@@ -130,6 +149,7 @@
 
         <button class="btn btn-primary" style="margin-right: 5px;" (click)="addAdmin()" type="button" [disabled]="isSubmitted">Ajouter Administrateur</button>
         <app-alert type="success" *ngIf="IsAdded">User Ajouté avec successé</app-alert>
+        <app-alert type="danger" *ngIf="isEqual">mot de passe non confirmer</app-alert>
     </div>
 
 </div>

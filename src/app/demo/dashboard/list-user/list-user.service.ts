@@ -15,6 +15,9 @@ export class ListUserService {
   listUser():Observable<any>{
     return this.http.get(URLS.ListUser);
   }
+  GetSearchUer(search:string):Observable<any>{
+    return this.http.get(URLS.SearchUser+`/${search}`);
+  }
   DeleteUser(email:string):Observable<any>{
     return this.http.delete(URLS.Delet +`/${email}`)
     

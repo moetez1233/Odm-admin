@@ -1,3 +1,4 @@
+import { HistoMeter } from './ShipmentFileINfo/HistMeter';
 export class Meters{
     id?:string;
     batterie?:string;
@@ -16,6 +17,10 @@ export class Meters{
     sim_card?:string;
     status?:string;
     is_Connected?:Boolean;
+    //histMetr?:HistoMeter[];
+    nbrRetry?:string;
+    ShowConfi_History?:Boolean;
+
     
     
     
